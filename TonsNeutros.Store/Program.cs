@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using TonsNeutros.Admin.Context;
+using TonsNeutros.Store.Repositories.Interfaces;
+using TonsNeutros.Store.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
          options.UseSqlServer(connection));
+
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
