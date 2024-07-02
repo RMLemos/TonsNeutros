@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonsNeutros.Admin", "TonsNeutros.Admin\TonsNeutros.Admin.csproj", "{FBF4EAD7-3B42-412E-ABD9-28A871F2A2FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonsNeutros.Store", "TonsNeutros.Store\TonsNeutros.Store.csproj", "{68E6BF04-E8FF-495D-BDD4-02FDF32945CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBF4EAD7-3B42-412E-ABD9-28A871F2A2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBF4EAD7-3B42-412E-ABD9-28A871F2A2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBF4EAD7-3B42-412E-ABD9-28A871F2A2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBF4EAD7-3B42-412E-ABD9-28A871F2A2FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E6BF04-E8FF-495D-BDD4-02FDF32945CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E6BF04-E8FF-495D-BDD4-02FDF32945CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E6BF04-E8FF-495D-BDD4-02FDF32945CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E6BF04-E8FF-495D-BDD4-02FDF32945CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5157549E-6B8C-4322-BECC-3E8EF39F1CE7}
+	EndGlobalSection
+EndGlobal
