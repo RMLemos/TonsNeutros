@@ -1,3 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap');
+
+:root {
+    /* Colors */
+    --color-dark: #260101;
+    --colorcopperLight: #BF712C;
+    --color-copperDark: #8C4014;
+    --color-light: #F2E7DC;
+    --color-gray: #594F46;
+    --clr-light-gray: rgb(230, 230, 245);
+    --clr-dark-shadow-5: rgba(0, 0, 10, 5%);
+    --clr-dark-shadow-10: rgba(0, 0, 10, 10%);
+    --clr-dark-shadow-20: rgba(0, 0, 10, 20%);
+    --clr-light-shadow-5: rgba(200, 200, 255, 5%);
+    --clr-light-shadow-10: rgba(200, 200, 255, 10%);
+    --clr-light-shadow-20: rgba(200, 200, 255, 20%);
+    --clr-white: rgb(244, 243, 239);
+    --clr-black: rgb(0, 0, 30);
+    --color-dark-text: #444;
+    --color-info-light: #cce5ff;
+    --color-debug-light: #cce5ff;
+    --color-success-light: #d4edda;
+    --color-alert-light: #fff3cd;
+    --color-warning-light: #fff3cd;
+    --color-error-light: #f8d7da;
+    --color-info-dark: #4d86c4;
+    --color-debug-dark: #4d86c4;
+    --color-success-dark: #4a9c5d;
+    --color-alert-dark: #927f40;
+    --color-warning-dark: #927f40;
+    --color-error-dark: #da525d;
+    /* Spacing */
+    --spacing: 1.5rem;
+    --spacing-gutter-medium: 3rem;
+    --spacing-gutter-large: 4rem;
+    /* Fonts */
+    --font-primary: 'Roboto', sans-serif;
+    --font-headings: "Raleway", Helvetica, sans-serif;
+    /* Font-Sizes */
+    /* https://royalfig.github.io/fluid-typography-calculator/ */
+    --fs-smlst: clamp(1.2rem, 1.092307692307692rem + 0.256410256410256vw, 1.4rem);
+    --fs-smlr: clamp(1.4rem, 1.292307692307692rem + 0.2564102564102566vw, 1.6rem);
+    --fs-sm: clamp(1.6rem, 1.4923076923076923rem + 0.25641025641025633vw, 1.8rem);
+    --fs-base: clamp(1.8rem, 1.6923076923076923rem + 0.25641025641025633vw, 2rem);
+    --fs-bg: clamp(2rem, 1.7846153846153847rem + 0.5128205128205127vw, 2.4rem);
+    --fs-bgr: clamp(2.4rem, 1.969230769230769rem + 1.025641025641026vw, 3.2rem);
+    --fs-bgst: clamp(3.2rem, 2.876923076923rem + 0.7692307692307687vw, 3.8rem);
+    --fs-h1: clamp(3.8rem, 3.2615384615384615rem + 1.282051282051282vw, 4.8rem);
+    --fs-h2: clamp(2.8rem, 1.938461538461538rem + 2.051282051282052vw, 4.4rem);
+    --fs-h3: clamp(2.4rem, 1.969230769230769rem + 1.025641025641026vw, 3.2rem);
+    --fs-h4: clamp(2.2rem, 1.8769230769230774rem + 0.7692307692307687vw, 2.8rem);
+    --fs-h5: clamp(1.8rem, 1.476923076923077rem + 0.769230769230769vw, 2.4rem);
+    --fs-h6: clamp(1.6rem, 1.2769230769230768rem + 0.7692307692307694vw, 2.2rem);
+    --main-page-width: 120rem;
+    --table-min-width: 60rem;
+    --transition-fast: 300ms;
+    --transition-medium: 600ms;
+    --transition-slow: 1s;
+    --default-border-radius: 4px;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: var(--color-light-pink);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-pink);
+}
+
+/* Nav Bar */
+
+nav {
+    max-width: 100%;
+    background: var(--color-copperDark);
+    padding: 1.5rem 10rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.logo-link {
+    color: var(--color-light);
+    text-decoration: none;
+}
+
+.logo-link:hover {
+     color: var(--colorcopperLight);
+}
+
+/* Menu */
+
+.hidden-text {
+    display: none;
+}
+
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    min-height: 100vh;
+    overflow-y: auto;
+    background: var(--color-copperDark);
+    z-index: 2;
+    transition: all 300ms ease-in-out;
+}
+
+.menu-container a {
+    color: var(--color-light);
+}
+
+.menu-hidden {
+    left: -255px;
+}
+
+.button-show-menu {
+    position: fixed;
+    left: 265px;
+    top: 0.5rem;
+    color: var(--color-light);
+    background-color: var(--color-copperDark);
+    border: none;
+    font-size: 2rem;
+    z-index: 3;
+    padding: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.button-show-menu-visible {
+    visibility: visible;
+    opacity: 1;
+    left: 5px;
+}
+
+.button-close-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--color-light);
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.menu-aside {
+    display: flex;
+    flex-flow: column wrap;
+    font-family: var(--font-headings);
+    font-size: 1.2rem;
+}
+
+.menu-aside a {
+    width: 100%;
+    padding: 1rem;
+}
+
+
+/* Cards */
+
+.section-title {
+    text-align: center;
+    margin-bottom: var(--spacing);
+    font-size: var(--fs-bg);
+}
+
+/* Book Card */
+
+.main-content {
+    max-width: 144rem;
+    margin: 0 auto;
+    padding: var(--spacing-gutter-medium);
+}
+
+.main-content-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 0.2rem;
+}
+
+.book {
+    background: #ddeeff;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, .2);
+    transform: scale(1);
+    transition: all 300ms ease-in-out;
+    border-radius: .4rem;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.book img {
+    max-width: 100%;
+}
+
+.book-list-item {
+    max-width: 32rem;
+}
+
+.book-list-item:hover {
+    transform: scale(1.02);
+    box-shadow: -8px 8px 18px rgba(0, 0, 0, .25);
+}
+
+.book-title-container {
+    padding: var(--spacing);
+    padding-bottom: 0.8rem;
+    background-color: #ddeeff;
+}
+
+.book-link {
+    color: var(--clr-black);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.book-author {
+    padding: 0 var(--spacing);
+    margin-bottom: 12px;
+}
+
+.book-author-item {
+    background-color: #ddeeff;
+    color: var(--clr-black);
+    margin-right: 1rem;
+    font-size: 1rem;
+}
+
+
+
+
 html {
   font-size: 14px;
 }

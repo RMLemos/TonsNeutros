@@ -1,0 +1,19 @@
+﻿@model Product
+
+<div class="book book-list-item">
+    <div class="book-cover">
+        <img src="@Model.ImageURL" alt="Image of the cover of the book">
+    </div>
+    <div class="book-title-container">
+        <a class="book-link" href="{% url 'library:book_detail' book.id %}">
+            @Model.ProductName
+        </a>
+    </div>
+
+    <div class="book-author">
+        <span class="book-author-item">
+            @Model.Price.ToString("c")
+        </span>
+    </div>
+</div>
+

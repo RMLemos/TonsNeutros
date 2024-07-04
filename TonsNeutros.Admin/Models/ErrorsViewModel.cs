@@ -1,6 +1,6 @@
 namespace TonsNeutros.Admin.Models
 {
-    public class ErrorViewModel
+    public class ErrorsViewModel
     {
         public string? RequestId { get; set; }
 

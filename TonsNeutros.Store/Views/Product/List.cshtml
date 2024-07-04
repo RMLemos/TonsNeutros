@@ -1,0 +1,17 @@
+﻿@model ProductListViewModel
+
+<main class="main-content-container">
+    <div class="main-content main-content-list container">
+        @if (Model == null || Model.Products == null || !Model.Products.Any())
+        {
+            <h2 class="text-center"> There are no products.</h2>
+        }
+        else
+        {
+            @foreach (var product in Model.Products)
+            {
+                <partial name="_ProductsDetail" for="@product" />
+            }
+        }
+    </div>
+</main>
