@@ -1,8 +1,21 @@
-﻿@{
+﻿@model HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<main class="main-content-container">
+    <div class="main-content main-content-list container">
+        @if (Model == null || Model.FeaturedProducts == null || !Model.FeaturedProducts.Any())
+        {
+            <h2 class="text-center"> There are no products.</h2>
+        }
+        else
+        {
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <partial name="_ProductsDetail" for="@product" />
+            }
+        }
+    </div>
+</main>

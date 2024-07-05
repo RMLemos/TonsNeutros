@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TonsNeutros.Admin.Context;
 using TonsNeutros.Store.Repositories.Interfaces;
 using TonsNeutros.Store.Repositories;
+using TonsNeutros.Admin.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +13,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sp => ShoppingCart.GetShoppingCart(sp));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -29,6 +36,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

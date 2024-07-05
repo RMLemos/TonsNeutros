@@ -1,0 +1,50 @@
+﻿@model ShoppingCartViewModel
+
+<main class="main-content-container">
+    <div class="main-content main-content-list container">
+        @if (Model == null || Model.ShoppingCart == null || Model.ShoppingCart.CartItems == null || !Model.ShoppingCart.CartItems.Any())
+        {
+            <h2 class="text-center"> Your shopping cart is empty.</h2>
+        }
+        else
+        {
+            <div class="responsive-table">
+                <table class="contacts-table">
+                    <caption class="table-caption">
+                        Contacts
+                    </caption>
+
+                    <thead>
+                        <tr class="table-row table-row-header">
+                            <th class="table-header">Quantidade</th>
+                            <th class="table-header">Produto</th>
+                            <th class="table-header">Preço</th>
+                            <th class="table-header">Subtotal</th>
+                            <th class="table-header"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.ShoppingCart.CartItems)
+                        {
+                            <tr class="table-row">
+                                <td class="table-cel">@item.Quantity</td>
+                                <td class="tablecel">@item.Product.ProductName</td>
+                                <td class="tablecel">@item.Product.Price.ToString("c")</td>
+                                @* <td class="tablecel">
+                                    {{ contact.email }}
+                                </td>
+                                <td class="tablecel">
+                                    {{ contact.city }}
+                                </td>
+                                <td class="tablecel">
+                                    {{ contact.country }}
+                                </td> *@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</main>

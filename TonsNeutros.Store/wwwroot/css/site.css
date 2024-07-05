@@ -72,6 +72,11 @@ html {
     font-weight: 500;
 }
 
+body {
+    background: var(--color-light);
+    color: var(--color-dark);
+}
+
 img {
     max-width: 100%;
 }
@@ -256,7 +261,57 @@ nav {
     font-size: 1rem;
 }
 
+/* Table */
+.responsive-table {
+    width: 100%;
+    overflow-x: auto;
+}
 
+.contacts-table {
+    width: 100%;
+    min-width: var(--table-min-width);
+    border-collapse: collapse;
+}
+
+.table-caption {
+    font-size: var(--medium-font-size);
+    font-weight: bold;
+    padding: var(--spacing);
+}
+
+.table-row {
+    text-align: left;
+    text-overflow: ellipsis;
+    transition: background-color var(--transition-fast) ease-in-out;
+}
+
+.table-row:nth-of-type(2n) {
+    background: var(--clr-dark-shadow-5);
+}
+
+.table-row:not(.table-row-header):hover {
+    background: var(--clr-dark-shadow-10);
+}
+
+.table-row-header {
+    background: var(--clr-light-gray);
+    color: var(--clr-black-font);
+}
+
+.table-cel,
+.table-header {
+    padding: var(--spacing);
+}
+
+.table-link {
+    color: var(--link-dark-color);
+    transition: color var(--transition-fast) ease-in-out;
+    text-decoration: none;
+}
+
+.table-link:hover {
+    color: var(--clr-black-font);
+}
 
 
 html {
