@@ -23,7 +23,10 @@ namespace TonsNeutros.Store.Controllers
             };
             return View(homeViewModel);
         }
-
+        public IActionResult Contact()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
