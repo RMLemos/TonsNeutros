@@ -1,0 +1,4 @@
+﻿@foreach (var category in Model)
+{
+    <a class="logo-link" asp-controller="Product" asp-action="List" asp-route-category="@category.CategoryName">@category.CategoryName</a>
+}

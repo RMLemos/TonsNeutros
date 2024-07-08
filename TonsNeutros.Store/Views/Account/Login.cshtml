@@ -1,0 +1,28 @@
+﻿@model LoginViewModel
+
+<main class="main-content-container">
+    <div class="main-content main-content-list container">
+        <div class="form-wrapper">
+        <h2 class="text-center">Login</h2>
+        <form asp-controller="Account" asp-action="Register" method="post" class="main-form">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-content">
+                <div class="form-group">
+                    <label asp-for="EmailAddress"></label>
+                    <input asp-for="EmailAddress" />
+                    <span asp-validation-for="EmailAddress" class="help-text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password" class=" help-text"></span>
+                </div>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <button class="btn" type="submit">Login </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

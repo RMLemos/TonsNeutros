@@ -3,12 +3,17 @@ using TonsNeutros.Admin.Context;
 using TonsNeutros.Store.Repositories.Interfaces;
 using TonsNeutros.Store.Repositories;
 using TonsNeutros.Admin.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
          options.UseSqlServer(connection));
+
+builder.Services.AddIdentity<Buyer, IdentityRole>()
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
@@ -39,7 +44,13 @@ app.UseRouting();
 
 app.UseSession();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "CategoryFilter",
+    pattern: "Product/{action}/{category?}",
+    defaults: new { controller = "Product", action = "List" });
 
 app.MapControllerRoute(
     name: "default",

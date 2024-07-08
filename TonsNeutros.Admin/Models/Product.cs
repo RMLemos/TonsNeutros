@@ -13,26 +13,26 @@ public class Product
 
     [Required(ErrorMessage = "This field is required.")]
     [StringLength(50, MinimumLength = 10, ErrorMessage = "The {0} must have at least {2} characters and the maximum length is {1} characters.")]
-    [Display(Name = "Name")]
+    [Display(Name = "Nome")]
     public string? ProductName { get; set; }
 
     [Required(ErrorMessage = "This field is required.")]
     [StringLength(100, MinimumLength = 10, ErrorMessage = "The {0} must have at least {2} characters and the maximum length is {1} characters.")]
-    [Display(Name = "Short Description")]
+    [Display(Name = "Descrição curta")]
     public string? ShortDescription { get; set; }
 
     [Required(ErrorMessage = "This field is required.")]
     [StringLength(200, MinimumLength = 10, ErrorMessage = "The {0} must have at least {2} characters and the maximum length is {1} characters.")]
-    [Display(Name = "Name")]
+    [Display(Name = "Descrição")]
     public string? Description { get; set; }
 
     [Required(ErrorMessage = "This field is required.")]
-    [Display(Name = "Price")]
+    [Display(Name = "Preço")]
     [Column(TypeName = "decimal(10,2)")]
     [Range(1, 999.99, ErrorMessage = "The established price varies from 1 to 999,99")]
     public decimal Price { get; set; }
 
-    [Display(Name = "Image")]
+    [Display(Name = "Imagem")]
     [StringLength(200, ErrorMessage = "The maximum length is {1} characters.")]
     public string? ImageURL { get; set; }
 
@@ -44,16 +44,16 @@ public class Product
     [Range(0, int.MaxValue, ErrorMessage = "Only positive number allowed")]
     public int Stock { get; set; }
 
-    [Display(Name = "Is  Featured?")]
+    [Display(Name = "Produto Destacado?")]
     public bool IsFeatured { get; set; }
 
-    [Display(Name = "In stock")]
+    [Display(Name = "Em stock")]
     public bool StockInHand { get; set; }
 
     [DefaultValue(typeof(DateTime), "")]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    [Display(Name = "Categories")]
+    [Display(Name = "Categorias")]
     public int CategoryId { get; set; }
     public virtual Category? Category { get; set; }
 }

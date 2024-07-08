@@ -1,0 +1,21 @@
+﻿@model Product
+
+<main class="main-content">
+    <div class="main-bg">
+        <section class="hero">
+            <img class="hero-content-img" @* src={{ book.cover.url }} alt="Book cover of" *@>
+            <header class="hero-content">
+                <h2 class="hero-content-title">@Model.ProductName</h2>
+                <a class="hero-content-subtitle">
+                    @Model.ShortDescription
+                </a>
+                <div class="data-meta">
+                    <span class="data-meta-text">@Model.Price</span>
+                    <span class="data-meta-text">@Model.Description</span>
+                    @* <span class="data-meta-text">Pages: {{ book.nr_pages }}</span> *@
+                </div>
+                <button class="start-reading-button" href="#">Add to cart</button>
+            </header>
+        </section>
+    </div>
+</main>
