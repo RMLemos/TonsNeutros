@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TonsNeutros.Admin.Context;
 
@@ -11,9 +12,11 @@ using TonsNeutros.Admin.Context;
 namespace TonsNeutros.Admin.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240709132846_OrderDetails")]
+    partial class OrderDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -295,9 +298,6 @@ namespace TonsNeutros.Admin.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("BuyerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -314,8 +314,6 @@ namespace TonsNeutros.Admin.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("BuyerId");
 
@@ -494,15 +492,9 @@ namespace TonsNeutros.Admin.Migrations
 
             modelBuilder.Entity("TonsNeutros.Admin.Models.Order", b =>
                 {
-                    b.HasOne("TonsNeutros.Admin.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("TonsNeutros.Admin.Models.Buyer", "Buyer")
                         .WithMany()
                         .HasForeignKey("BuyerId");
-
-                    b.Navigation("Address");
 
                     b.Navigation("Buyer");
                 });

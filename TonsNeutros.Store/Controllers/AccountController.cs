@@ -99,7 +99,7 @@ public class AccountController : Controller
 
         if (result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(newUser, "Author");
+            //await _userManager.AddToRoleAsync(newUser, "Author");
             return RedirectToAction("Login", "Account");
         }
         else
@@ -108,5 +108,13 @@ public class AccountController : Controller
         }
 
         return View(registerVM);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        HttpContext.Session.Clear();
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }
