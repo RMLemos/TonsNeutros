@@ -14,6 +14,10 @@
             @await Component.InvokeAsync("CategoryMenu")
             <a class="logo-link" asp-area="" asp-controller="Product" asp-action="List">Products</a>
             @await Html.PartialAsync("_LoginPartial")
+            @if (User.IsInRole("Admin"))
+            {
+                <a href=""></a>
+            }
         </aside>
     </div>
 </div>

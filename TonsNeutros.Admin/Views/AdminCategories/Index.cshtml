@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TonsNeutros.Admin.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="mt-3">Categorias</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-dark mt-3">Adicionar Categoria</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr class="table-light">
+            <th scope="row">
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th scope="row">
+                @Html.DisplayNameFor(model => model.CategoryDescription)
+            </th>
+            <th scope="row"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="table-light">
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.CategoryId">Categoria</a> |
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

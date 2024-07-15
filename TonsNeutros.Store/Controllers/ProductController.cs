@@ -1,48 +1,75 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TonsNeutros.Admin.Migrations;
 using TonsNeutros.Admin.Models;
 using TonsNeutros.Store.Repositories.Interfaces;
 using TonsNeutros.Store.ViewModels;
 
-namespace TonsNeutros.Store.Controllers
+namespace TonsNeutros.Store.Controllers;
+
+public class ProductController : Controller
 {
-    public class ProductController : Controller
+    private readonly IProductRepository _productRepository;
+
+    public ProductController(IProductRepository productRepository)
     {
-        private readonly IProductRepository _productRepository;
+        _productRepository = productRepository;
+    }
 
-        public ProductController(IProductRepository productRepository)
+    public IActionResult List(string category)
+    {
+        IEnumerable<Product> products;
+        string currentCategory = string.Empty;
+
+        if (string.IsNullOrEmpty(category))
         {
-            _productRepository = productRepository;
+            products = _productRepository.Products.OrderBy(p => p.ProductId);
+            currentCategory = "Products";
         }
-
-        public IActionResult List(string category)
+        else
         {
-            IEnumerable<Product> products;
-            string currentCategory = string.Empty;
+            products = _productRepository.Products
+                .Where(c => c.Category.CategoryName.Equals(category))
+                .OrderBy(c => c.ProductName);
+            currentCategory = category;
+        }
+        var productsListViewModel = new ProductListViewModel()
+        {
+            Products = products,
+            CurrentCategory = currentCategory,
+        };
+        return View(productsListViewModel);
+    }
 
-            if (string.IsNullOrEmpty(category))
-            {
-                products = _productRepository.Products.OrderBy(p => p.ProductId);
+    public IActionResult Details(int productid)
+    {
+        var product = _productRepository.Products.FirstOrDefault(p => p.ProductId == productid);
+        return View(product);
+    }
+
+    public ViewResult Search(string searchString)
+    {
+        IEnumerable<Product> products;
+        string currentCategory = string.Empty;
+
+        if (string.IsNullOrEmpty(searchString))
+        {
+            products = _productRepository.Products.OrderBy(p =>p.ProductId);
+            currentCategory = "Products";
+        }
+        else
+        {
+            products = _productRepository.Products.Where(p=>p.ProductName.ToLower().Contains(searchString.ToLower()));
+
+            if(products.Any())
                 currentCategory = "Products";
-            }
             else
-            {
-                products = _productRepository.Products
-                    .Where(c => c.Category.CategoryName.Equals(category))
-                    .OrderBy(c => c.ProductName);
-                currentCategory = category;
-            }
-            var productsListViewModel = new ProductListViewModel()
-            {
-                Products = products,
-                CurrentCategory = currentCategory,
-            };
-            return View(productsListViewModel);
+                currentCategory = "Nenhum produto foi encontrado";
         }
-
-        public IActionResult Details(int productid)
+        return View("~/Views/Product/List.cshtml", new ProductListViewModel
         {
-            var product = _productRepository.Products.FirstOrDefault(p => p.ProductId == productid);
-            return View(product);
-        }
+            Products = products,
+            CurrentCategory = currentCategory,
+
+        });
     }
 }

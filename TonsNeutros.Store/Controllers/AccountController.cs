@@ -99,7 +99,7 @@ public class AccountController : Controller
 
         if (result.Succeeded)
         {
-            //await _userManager.AddToRoleAsync(newUser, "Author");
+            await _userManager.AddToRoleAsync(newUser, "Member");
             return RedirectToAction("Login", "Account");
         }
         else
@@ -116,5 +116,10 @@ public class AccountController : Controller
         HttpContext.Session.Clear();
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 }

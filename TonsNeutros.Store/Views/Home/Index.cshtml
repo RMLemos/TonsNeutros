@@ -8,11 +8,20 @@
     <img class="full-width-image" src="~/images/decor-home.jpg" />
 </main>
 
+<div class="search-container">
+    <div class="container">
+        <form asp-controller="Product" asp-action="Search" method="get" class="search-form">
+            <input type="text" placeholder="Procurar produto" name="searchString" value="@ViewData["searchString"]" class="search-input">
+            <button type="submit" class="search-button"><img src="~/images/search.png" /></button>
+        </form>
+    </div>
+</div>
+
 <main class="main-content-container">
     <div class="main-content main-content-list container">
         @if (Model == null || Model.FeaturedProducts == null || !Model.FeaturedProducts.Any())
         {
-            <h2 class="text-center"> There are no products.</h2>
+            <h2 class="text-center">Não existem produtos para apresentar</h2>
         }
         else
         {

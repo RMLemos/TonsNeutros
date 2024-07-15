@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TonsNeutros.Admin.Context;
 using TonsNeutros.Admin.Models;
+using TonsNeutros.Store.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,16 @@ builder.Services.AddIdentity<Buyer, IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin",
+        policy =>
+        {
+            policy.RequireRole("Admin");
+        });
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -31,6 +42,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+CreateUsers(app);
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -39,3 +52,14 @@ app.MapControllerRoute(
     pattern: "{controller=Admin}/{action=Index}/{id?}");
 
 app.Run();
+
+void CreateUsers(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        service.SeedRoles();
+        service.SeedUsers();
+    }
+}
