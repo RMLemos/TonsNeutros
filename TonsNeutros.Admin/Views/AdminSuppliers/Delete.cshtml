@@ -4,12 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h2 class="mt-4">Apagar fornecedor</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Supplier</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.SupplierName)
@@ -54,10 +51,11 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
-    
+
+    <h5>Tem a certeza que pretende apagar o fornecedor?</h5>
     <form asp-action="Delete">
         <input type="hidden" asp-for="SupplierId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-info" />
+        <a asp-action="Index" class="btn btn-outline-secondary">Voltar</a>
     </form>
 </div>

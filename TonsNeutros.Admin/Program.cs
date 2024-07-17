@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using TonsNeutros.Admin.Context;
 using TonsNeutros.Admin.Models;
 using TonsNeutros.Store.Services;
@@ -26,6 +27,12 @@ builder.Services.AddAuthorization(options =>
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddPaging(options =>
+{
+    options.ViewName = "Bootstrap5";
+    options.PageParameterName = "pageindex";
+});
 
 var app = builder.Build();
 

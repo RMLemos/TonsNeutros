@@ -21,7 +21,6 @@ public class Supplier
     public string? SupplerProducts { get; set; }
 
     [Required(ErrorMessage = "Este campo é obrigatório")]
-    [StringLength(50, ErrorMessage = "O número de caracteres máximo é de 50")]
     [Display(Name = "NIPC")]
     public int Nipc { get; set; }
 

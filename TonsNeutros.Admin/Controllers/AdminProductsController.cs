@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using TonsNeutros.Admin.Context;
 using TonsNeutros.Admin.Models;
 
@@ -16,10 +17,25 @@ namespace TonsNeutros.Admin.Controllers
         }
 
         // GET: AdminProducts
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var appDbContext = _context.Products.Include(p => p.Category);
+        //    return View(await appDbContext.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "ProductName")
         {
-            var appDbContext = _context.Products.Include(p => p.Category);
-            return View(await appDbContext.ToListAsync());
+            var result = _context.Products.Include(l => l.Category).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                result = result.Where(p => p.ProductName.Contains(filter));
+            }
+
+            var model = await PagingList.CreateAsync(result, 10, pageindex, sort, "ProductName");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+
+            return View(model);
         }
 
         // GET: AdminProducts/Details/5
@@ -53,10 +69,11 @@ namespace TonsNeutros.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDescription,Description,Price,ImageURL,ImageThumbnailURL,Stock,IsFeatured,StockInHand,CreatedAt,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDescription,Description,Price,ImageURL,ImageThumbnailURL,Stock,IsFeatured,StockInHand,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
+                product.CreatedAt = DateTime.Now;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

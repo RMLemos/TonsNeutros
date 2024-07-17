@@ -4,60 +4,42 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2 class="mt-3">Fornecedores</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-dark mt-3">Create New</a>
 </p>
 
 @if(!Model.Any())
 {
-    <h2 class="text-center"> There are no categories</h2>
+    <h2 class="text-center">Não existem fornecedores para apresentar</h2>
 }
 else
 {
-    <table class="table">
+    <table class="table table-hover">
         <thead>
-            <tr>
-                <th>
+            <tr class="table-light">
+                <th scope="row">
                     @Html.DisplayNameFor(model => model.SupplierName)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplerProducts)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nipc)
-                </th>
-                <th>
+                <th scope="row">
                     @Html.DisplayNameFor(model => model.ComercialName)
                 </th>
-                <th>
+                <th scope="row">
                     @Html.DisplayNameFor(model => model.PhoneNumber)
                 </th>
-                <th>
+                <th scope="row">
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
-                <th></th>
+                <th scope="row"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="table-light">
                     <td>
                         @Html.DisplayFor(modelItem => item.SupplierName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SupplerProducts)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nipc)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ComercialName)
@@ -69,9 +51,9 @@ else
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.SupplierId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.SupplierId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.SupplierId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.SupplierId">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.SupplierId">Fornecedor</a> |
+                        <a asp-action="Delete" asp-route-id="@item.SupplierId">Apagar</a>
                     </td>
                 </tr>
             }
