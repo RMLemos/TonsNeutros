@@ -23,4 +23,6 @@ public class Address
     [StringLength(100, MinimumLength = 5, ErrorMessage = "The {0} must have at least {2} characters and the maximum length is {1} characters.")]
     [Display(Name = "País")]
     public string? Country { get; set; }
+
+    public Buyer? Buyer { get; set; }
 }

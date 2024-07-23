@@ -1,0 +1,47 @@
+﻿@model TonsNeutros.Store.ViewModels.BuyerFormViewModel
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Buyer.Name" class="control-label"></label>
+        <input asp-for="Buyer.Name" class="form-control" />
+        <span asp-validation-for="Buyer.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Buyer.Nif" class="control-label"></label>
+        <input asp-for="Buyer.Nif" class="form-control" />
+        <span asp-validation-for="Buyer.Nif" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Buyer.PhoneNumber" class="control-label"></label>
+        <input asp-for="Buyer.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Buyer.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Street" class="control-label"></label>
+        <input asp-for="Address.Street" class="form-control" />
+        <span asp-validation-for="Address.Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Place" class="control-label"></label>
+        <input asp-for="Address.Place" class="form-control" />
+        <span asp-validation-for="Address.Place" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.ZipCode" class="control-label"></label>
+        <input asp-for="Address.ZipCode" class="form-control" />
+        <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.City" class="control-label"></label>
+        <input asp-for="Address.City" class="form-control" />
+        <span asp-validation-for="Address.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Country" class="control-label"></label>
+        <input asp-for="Address.Country" class="form-control" />
+        <span asp-validation-for="Address.Country" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

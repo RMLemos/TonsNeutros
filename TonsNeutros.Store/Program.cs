@@ -18,6 +18,8 @@ builder.Services.AddIdentity<Buyer, IdentityRole>()
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IBuyerRepository, BuyerRepository>();
+builder.Services.AddTransient<IAddressRepository, AddressRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => ShoppingCart.GetShoppingCart(sp));
