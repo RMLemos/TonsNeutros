@@ -4,50 +4,52 @@ using TonsNeutros.Admin.Models;
 using TonsNeutros.Store.Repositories.Interfaces;
 using TonsNeutros.Store.ViewModels;
 
-namespace TonsNeutros.Store.Controllers
+namespace TonsNeutros.Store.Controllers;
+
+public class ShoppingCartController : Controller
 {
-    public class ShoppingCartController : Controller
+    private readonly IProductRepository _productRepository;
+    private readonly ShoppingCart _shoppingCart;
+
+    public ShoppingCartController(IProductRepository productRepository, ShoppingCart shoppingCart)
     {
-        private readonly IProductRepository _productRepository;
-        private readonly ShoppingCart _shoppingCart;
+        _productRepository = productRepository;
+        _shoppingCart = shoppingCart;
+    }
 
-        public ShoppingCartController(IProductRepository productRepository, ShoppingCart shoppingCart)
+    [Authorize]
+    public IActionResult Index()
+    {
+        var items = _shoppingCart.GetCartItems();
+        _shoppingCart.CartItems = items;
+
+        var shoppingCartVM = new ShoppingCartViewModel
         {
-            _productRepository = productRepository;
-            _shoppingCart = shoppingCart;
-        }
+            ShoppingCart = _shoppingCart,
+            ShoppingCartTotal = _shoppingCart.GetTotalCart(),
+        };
+        return View(shoppingCartVM);
+    }
 
-        public IActionResult Index()
+    [Authorize]
+    public IActionResult AddItemShoppingCart(int productId)
+    {
+        var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
+        if (selectedProduct != null)
         {
-            var items = _shoppingCart.GetCartItems();
-            _shoppingCart.CartItems = items;
-
-            var shoppingCartVM = new ShoppingCartViewModel
-            {
-                ShoppingCart = _shoppingCart,
-                ShoppingCartTotal = _shoppingCart.GetTotalCart(),
-            };
-            return View(shoppingCartVM);
+            _shoppingCart.AddToCart(selectedProduct);
         }
+        return RedirectToAction("Index");
+    }
 
-        public IActionResult AddItemShoppingCart(int productId)
+    [Authorize]
+    public IActionResult RemoveItemShoppingCart(int productId)
+    {
+        var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
+        if (selectedProduct != null)
         {
-            var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
-            if (selectedProduct != null)
-            {
-                _shoppingCart.AddToCart(selectedProduct);
-            }
-            return RedirectToAction("Index");
+            _shoppingCart.RemoveFromCart(selectedProduct);
         }
-
-        public IActionResult RemoveItemShoppingCart(int productId)
-        {
-            var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
-            if (selectedProduct != null)
-            {
-                _shoppingCart.RemoveFromCart(selectedProduct);
-            }
-            return RedirectToAction("Index");
-        }
+        return RedirectToAction("Index");
     }
 }

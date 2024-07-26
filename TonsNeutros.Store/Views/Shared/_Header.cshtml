@@ -3,6 +3,8 @@
         <span class="logo">
             <a class="logo-link" asp-area="" asp-controller="Home" asp-action="Index">Tons Neutros</a>
         </span>
-        @await Component.InvokeAsync("ShoppingCartSummary")
+        <div class="shopping-cart">
+            @await Component.InvokeAsync("ShoppingCartSummary")
+        </div>
     </nav>
 </header>
