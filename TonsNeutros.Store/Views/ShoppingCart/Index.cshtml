@@ -3,7 +3,7 @@
 <div class="content">
     @if (Model == null || Model.ShoppingCart == null || Model.ShoppingCart.CartItems == null || !Model.ShoppingCart.CartItems.Any())
     {
-        <h2 class="text-center"> Your shopping cart is empty.</h2>
+        <h2 class="center"> Your shopping cart is empty.</h2>
     }
     else
     {
@@ -46,7 +46,7 @@
                 </tfoot>
             </table>
             <div class="button-container">
-                <a class="cancel-btn" asp-controller="Product" asp-action="List">Cancelar</a>
+                <a class="cancel-btn" asp-controller="Product" asp-action="List">Adicionar produto</a>
                 <a class="order-btn" asp-controller="Order" asp-action="Checkout">Comprar</a>
             </div>
         </div>

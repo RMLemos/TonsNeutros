@@ -1,20 +1,18 @@
 ﻿@model Product
 
 <main class="main-content">
-    <div class="main-bg">
-        <section class="hero">
-            <img class="hero-content-img" src="@Url.Content(Model.ImageURL)" alt="Image of the product" />
-            <header class="hero-content">
-                <h4 class="hero-content-title">@Model.ProductName</h4>
-                <p class="hero-content-subtitle">
-                    @Model.ShortDescription
-                </p>
-                <div class="data-meta"> 
-                    <span class="data-meta-text">@Model.Description</span>
-                    <span class="data-meta-text">@Model.Price</span>
-                </div>
-                <button class="buy-button"><a id="cartButton" asp-controller="ShoppingCart" asp-action="AddItemShoppingCart" asp-route-productId="@Model.ProductId">Comprar</a></button>
-            </header>
-        </section>
-    </div>
+    <section class="hero">
+        <img class="hero-content-img" src="@Url.Content(Model.ImageURL)" alt="Image of the product" />
+        <header class="hero-content">
+            <h4 class="hero-content-title">@Model.ProductName</h4>
+            <p class="hero-content-subtitle">
+                @Model.ShortDescription
+            </p>
+            <div class="data-meta"> 
+                <span class="data-meta-text">@Model.Description</span>
+                <span class="data-meta-text">@Model.Price</span>
+            </div>
+            <button class="buy-button"><a id="cartButton" asp-controller="ShoppingCart" asp-action="AddItemShoppingCart" asp-route-productId="@Model.ProductId">Comprar</a></button>
+        </header>
+    </section>
 </main>

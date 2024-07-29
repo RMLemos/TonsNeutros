@@ -18,18 +18,6 @@
     --clr-white: rgb(244, 243, 239);
     --clr-black: rgb(0, 0, 30);
     --color-dark-text: #444;
-    --color-info-light: #cce5ff;
-    --color-debug-light: #cce5ff;
-    --color-success-light: #d4edda;
-    --color-alert-light: #fff3cd;
-    --color-warning-light: #fff3cd;
-    --color-error-light: #f8d7da;
-    --color-info-dark: #4d86c4;
-    --color-debug-dark: #4d86c4;
-    --color-success-dark: #4a9c5d;
-    --color-alert-dark: #927f40;
-    --color-warning-dark: #927f40;
-    --color-error-dark: #da525d;
     /* Spacing */
     --spacing: 1.5rem;
     --spacing-gutter-medium: 3rem;
@@ -87,6 +75,12 @@ a {
 
 a:hover {
     color: var(--color-pink);
+}
+
+/* Generics */
+
+.center {
+    text-align: center;
 }
 
 /* Images */
@@ -282,7 +276,7 @@ nav {
     font-size: var(--fs-bg);
 }
 
-/* Book Card */
+/* Product Card */
 
 .main-content {
     max-width: 144rem;
@@ -349,10 +343,6 @@ nav {
     margin-bottom: 48px;
 }
 
-.main-bg {
-    background: var(--color-light);
-}
-
 .hero {
     display: flex;
     flex-direction: row;
@@ -408,13 +398,6 @@ nav {
 
 .data-meta-text {
     font-size: 1.1rem;
-    padding-right: var(--spacing);
-}
-
-.text-meta {
-    margin-bottom: var(--spacing);
-    margin-left: 170px;
-    margin-right: 170px;
 }
 
 /* Table */
@@ -487,15 +470,14 @@ tablecel-delete {
     display: inline-block;
 }
 
-/* Estilo para o rodapé da tabela */
 .table-footer {
     background: var(--clr-dark-shadow-5);
-    color: var(--color-dark); /* Cor do texto igual ao cabeçalho */
+    color: var(--color-dark);
 }
 
 .table-footer-total {
-    padding: var(--spacing); /* Padding igual ao cabeçalho e células */
-    text-align: right; /* Alinhamento do texto à direita */
+    padding: var(--spacing);
+    text-align: right;
 }
 
 .button-container {
@@ -541,11 +523,10 @@ tablecel-delete {
     color: white;
 }
 
-
 /* Forms Login / Register */
 
 .form-wrapper {
-    max-width: 45rem;
+    max-width: 64rem;
     margin: var(--spacing) auto;
 }
 
@@ -608,6 +589,7 @@ tablecel-delete {
   
 .btn {
    background-color: #30492E;
+   color: var(--clr-white);
    font-weight: bold;
    border: none;
    padding: 1rem 2rem;
@@ -618,6 +600,53 @@ tablecel-delete {
   
 .btn:hover {
   filter: brightness(90%);
+}
+
+/* Form Address */
+
+.aform-wrapper {
+    max-width: 64rem;
+    margin: 2rem auto;
+}
+
+.aform-content {
+    margin: 1rem 0;
+}
+
+.aform-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+}
+
+.aform-group .help-text,
+.aform-group .help-text ~ ul {
+    margin: 0;
+    font-size: 1rem;
+    list-style: none;
+}
+
+.aform-group input,
+.aform-group textarea,
+.aform-group select {
+    padding: 1rem;
+    border-radius: var(--default-border-radius);
+    border: 1px solid #dfab92;
+    width: 600px;
+    box-sizing: border-box;
+}
+
+.aform-group input:focus,
+.aform-group textarea:focus,
+.aform-group select:focus {
+    outline: none;
+    box-shadow: 0 0 5px #eb8452;
+    border-color: #eb8452;
+}
+
+.aform-group label {
+    font-size: var(--fs-smlst);
+    margin-bottom: .4rem;
 }
 
 /*Logout*/
@@ -642,12 +671,43 @@ tablecel-delete {
     color: var(--colorcopperLight);
 }
 
-html {
-  font-size: 14px;
+/* Order page */
+
+.main-bg {
+    background: #e5dacf;
+    padding: 20px;
 }
 
+.title-details {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.link-address {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.link-address:hover{
+    text-decoration: underline;
+}
+
+.address-meta {
+    display: flex;
+    flex-flow: column wrap;
+    text-align: start;
+    padding: var(--spacing);
+}
+
+.address-meta-text {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+
 @media (min-width: 768px) {
-  html {
+    html {
     font-size: 16px;
   }
 }

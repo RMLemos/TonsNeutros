@@ -1,0 +1,25 @@
+﻿@model TonsNeutros.Store.ViewModels.BuyerFormViewModel
+
+<div class="main-content">
+    <div class="title-details">
+        <h2> Dados de envio</h2>
+        <a class="link-address" asp-controller="Buyer" asp-action="Edit">Alterar morada</a>
+    </div>
+    <div class="main-bg">
+        <div class="address-meta">
+            <span class="address-meta-text">@Model.Buyer?.Name</span>
+            <span class="address-meta-text">@Model.Buyer?.Nif</span>
+            <span class="address-meta-text">@Model.Buyer?.PhoneNumber</span>
+            <span class="address-meta-text">@Model.Address?.Street</span>
+            <span class="address-meta-text">@Model.Address?.Place</span>
+            <span class="address-meta-text">@Model.Address?.ZipCode</span>
+            <span class="address-meta-text">@Model.Address?.City</span>
+            <span class="address-meta-text">@Model.Address?.Country</span>
+        </div>
+    </div>
+</div>
+
+<div class="button-container">
+    <a class="cancel-btn" asp-controller="ShoppingCart" asp-action="Index">Voltar ao Carrinho</a>
+    <input class="order-btn" type="submit" value="Place Order" />
+</div>

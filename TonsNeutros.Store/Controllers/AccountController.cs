@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TonsNeutros.Admin.Models;
 using TonsNeutros.Store.ViewModels;
@@ -16,6 +17,7 @@ public class AccountController : Controller
         _signInManager = signInManager;
     }
 
+    [AllowAnonymous]
     public IActionResult Login(string returnUrl)
     {
         return View(new LoginViewModel()
@@ -24,7 +26,7 @@ public class AccountController : Controller
         });
     }
 
-
+    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel loginVM)
     {
@@ -44,19 +46,24 @@ public class AccountController : Controller
             var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                if (string.IsNullOrEmpty(loginVM.ReturnUrl))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                return Redirect(loginVM.ReturnUrl);
             }
-            return Redirect(loginVM.ReturnUrl);
         }
         ModelState.AddModelError("", "Falha ao realizar o login");
         return View(loginVM);
     }
 
+    [AllowAnonymous]
     public IActionResult Register()
     {
         return View();
     }
 
+    [AllowAnonymous]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(RegisterViewModel registerVM)

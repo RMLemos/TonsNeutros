@@ -14,6 +14,7 @@ public class Address
     [Display(Name = "Localidade")]
     public string? Place { get; set; }
 
+    [Display(Name = "Código Postal")]
     public int ZipCode { get; set; }
 
     [StringLength(100, MinimumLength = 5, ErrorMessage = "The {0} must have at least {2} characters and the maximum length is {1} characters.")]
