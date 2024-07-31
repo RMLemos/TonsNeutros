@@ -59,8 +59,62 @@ public class OrderController : Controller
 
     [Authorize]
     [HttpPost]
-    public IActionResult Checkout(Order order) 
-    
-    { return View(order); }
+    public IActionResult Checkout(Order order)
+    {
+        var user = _httpContextAccessor.HttpContext.User;
+        var buyerId = _userManager.GetUserId(user);
 
+        var buyer = _buyerRepository.Buyers.FirstOrDefault(b => b.Id.Equals(buyerId));
+        if (buyer == null)
+        {
+            return RedirectToAction(nameof(Error), new { message = "User not found" });
+        }
+        order.BuyerId = buyerId;
+
+        var address = _addressRepository.Addresses.FirstOrDefault(u => u.AddressId == buyer.AddressId);
+
+        if (address == null)
+        {
+            return RedirectToAction(nameof(Error), new { message = "Address not found" });
+        }
+        order.AddressId = address.AddressId;
+
+
+        int orderTotalItems = 0;
+        decimal orderTotalPrice = 0.0m;
+
+        //obtem os itens do carrinho de compra do cliente
+        List<ShoppingCartItem> items = _shoppingCart.GetCartItems();
+        _shoppingCart.CartItems = items;
+
+        //verifica se existem itens no pedido
+        if (_shoppingCart.CartItems.Count == 0)
+        {
+            ModelState.AddModelError("", "Your cart is empty.");
+        }
+
+        //calcula o total de itens e o total do pedido
+        foreach (var item in items)
+        {
+            orderTotalItems += item.Quantity;
+            orderTotalPrice += (item.Product.Price * item.Quantity);
+        }
+
+        //atribui os valores obtidos ao pedido
+        order.TotalItemsOrder = orderTotalItems;
+        order.TotalOrder = orderTotalPrice;
+
+        //cria o pedido e os detalhes
+        _orderRepository.CreateOrder(order);
+
+        //define mensagens ao cliente
+        ViewBag.CheckoutCompleteMessage = "Muito obrigado. A sua encomenda está a caminho.";
+        ViewBag.TotalOrder = _shoppingCart.GetTotalCart();
+
+        //limpa o carrinho do cliente
+        _shoppingCart.CleanCart();
+
+        //exibe a view com dados do cliente e do pedido
+        return View("~/Views/Order/CheckoutComplete.cshtml", order);
+    }
 }

@@ -402,6 +402,10 @@ nav {
 
 /* Table */
 
+.table-top{
+    margin-top: 25px;
+}
+
 .content {
     max-width: var(--main-page-width);
     margin: calc(var(--spacing) * 2) auto;
@@ -671,6 +675,14 @@ tablecel-delete {
     color: var(--colorcopperLight);
 }
 
+/* Pages */
+
+.main-content-page {
+    max-width: 144rem;
+    margin: 0 40px auto;
+    padding: var(--spacing-gutter-medium);
+}
+
 /* Order page */
 
 .main-bg {
@@ -705,14 +717,62 @@ tablecel-delete {
     margin-bottom: 10px;
 }
 
+/* Footer */
+
+.main-footer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background: var(--color-dark);
+    color: var(--clr-white);
+    padding: var(--spacing);
+}
+
+.footer-copy {
+    align-items: center;
+    color: var(--clr-white);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.footer-menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.footer-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.footer-menu-item {
+    margin-right: 15px;
+}
+
+footer-link {
+    color: var(--color-white);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: var(--color-light);
+}
 
 @media (min-width: 768px) {
     html {
-    font-size: 16px;
-  }
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+/*.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -723,4 +783,4 @@ html {
 
 body {
   margin-bottom: 60px;
-}
+}*/

@@ -23,7 +23,7 @@ public class ProductController : Controller
         if (string.IsNullOrEmpty(category))
         {
             products = _productRepository.Products.OrderBy(p => p.ProductId);
-            currentCategory = "Products";
+            currentCategory = "Produtos";
         }
         else
         {
@@ -54,14 +54,14 @@ public class ProductController : Controller
         if (string.IsNullOrEmpty(searchString))
         {
             products = _productRepository.Products.OrderBy(p =>p.ProductId);
-            currentCategory = "Products";
+            currentCategory = "Produtos";
         }
         else
         {
             products = _productRepository.Products.Where(p=>p.ProductName.ToLower().Contains(searchString.ToLower()));
 
             if(products.Any())
-                currentCategory = "Products";
+                currentCategory = "Produtos";
             else
                 currentCategory = "Nenhum produto foi encontrado";
         }

@@ -1,0 +1,46 @@
+﻿@model Order
+
+<div class="main-content-page">
+    <div class="title-details">
+        <h2>@ViewBag.CheckoutCompleteMessage</h2>
+    </div>
+    <div class="main-bg">
+        <div class="address-meta">
+            <span class="address-meta-text">Cliente: <strong>@Model.Buyer?.Name</strong></span>
+            <span class="address-meta-text">Contacto: <strong>@Model.Buyer?.PhoneNumber</strong></span>
+            <span class="address-meta-text">Data de compra: <strong>@Model.OrderDate.ToString("dd/MM/yyyy")</strong></span>
+            <span class="address-meta-text">Data de envio: <strong>@Model.OrderSentDate</strong></span>
+        </div>
+    </div>
+    <div class="table-top"
+        <div class="responsive-table">
+            <table class="products-table">
+                <thead>
+                    <tr class="table-row table-row-header">
+                        <th class="table-header">Produto</th>
+                        <th class="table-header">Quantidade</th>
+                        <th class="table-header">Preço</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.ItemsOrder)
+                    {
+                        <tr class="table-row">
+                            <td class="tablecel">
+                                <div class="product-details">
+                                    <img class="product-image" src="@Url.Content(item.Product.ImageURL)" alt="@item.Product.ProductName" />
+                                    <span class="product-name">@item.Product.ProductName</span>
+                                </div>
+                            <td class="table-cel">@item.Quantity</td>
+                            <td class="tablecel">@item.Product.Price.ToString("c")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="button-container">
+                <a class="cancel-btn" asp-controller="Home" asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>

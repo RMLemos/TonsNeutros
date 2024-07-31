@@ -4,6 +4,7 @@ using TonsNeutros.Store.Repositories.Interfaces;
 using TonsNeutros.Store.Repositories;
 using TonsNeutros.Admin.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<Buyer, IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
+
+// Configurar cookies de autenticação para compartilhamento
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = ".AspNet.SharedCookie";
+    options.Cookie.Path = "/";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
+// Configurar proteção de dados para compartilhar as chaves
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Temp\keys"))
+    .SetApplicationName("SharedCookieApp");
 
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();

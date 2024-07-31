@@ -1,6 +1,6 @@
 ﻿@model TonsNeutros.Store.ViewModels.BuyerFormViewModel
 
-<div class="main-content">
+<div class="main-content-page">
     <div class="title-details">
         <h2> Dados de envio</h2>
         <a class="link-address" asp-controller="Buyer" asp-action="Edit">Alterar morada</a>
@@ -17,9 +17,12 @@
             <span class="address-meta-text">@Model.Address?.Country</span>
         </div>
     </div>
+    <form id="checkoutForm" asp-controller="Order" asp-action="Checkout" method="post">
+        <div class="button-container">
+            <a class="cancel-btn" asp-controller="ShoppingCart" asp-action="Index">Voltar ao Carrinho</a>
+            <input class="order-btn" type="submit" value="Finalizar compra" />
+        </div>
+    </form>
 </div>
 
-<div class="button-container">
-    <a class="cancel-btn" asp-controller="ShoppingCart" asp-action="Index">Voltar ao Carrinho</a>
-    <input class="order-btn" type="submit" value="Place Order" />
-</div>
+

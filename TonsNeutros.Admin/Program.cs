@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
@@ -25,6 +26,22 @@ builder.Services.AddAuthorization(options =>
             policy.RequireRole("Admin");
         });
 });
+
+// Configurar cookies de autenticação para compartilhamento
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = ".AspNet.SharedCookie";
+    options.Cookie.Path = "/";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
+// Configurar proteção de dados para compartilhar as chaves
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Temp\keys"))
+    .SetApplicationName("SharedCookieApp");
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
